@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 
-import type { SteamApp } from '../../shared/types'
+import type { Depot, SteamApp } from '../../shared/types'
 
 import { AddAppModal } from './components/AddAppModal'
 import { AppHeader } from './components/AppHeader'
@@ -53,16 +53,42 @@ export default function App(): JSX.Element {
     setSelectedAppId('')
   }
 
-  const handleUpdateDepotPath = (depotId: string, contentPath: string): void => {
+  const handleUpdateDepot = (oldId: string, next: Depot): void => {
     if (!selectedApp) return
     saveConfig({
       ...config,
       apps: config.apps.map((a) =>
         a.appId === selectedApp.appId
-          ? {
-              ...a,
-              depots: a.depots.map((d) => (d.id === depotId ? { ...d, contentPath } : d))
-            }
+          ? { ...a, depots: a.depots.map((d) => (d.id === oldId ? next : d)) }
+          : a
+      )
+    })
+  }
+
+  const handleAddDepot = (): void => {
+    if (!selectedApp) return
+    const usedIds = new Set(selectedApp.depots.map((d) => d.id))
+    let nextNumeric = Number(selectedApp.appId) + selectedApp.depots.length + 1
+    while (usedIds.has(String(nextNumeric))) nextNumeric += 1
+
+    saveConfig({
+      ...config,
+      apps: config.apps.map((a) =>
+        a.appId === selectedApp.appId
+          ? { ...a, depots: [...a.depots, { id: String(nextNumeric), contentPath: '' }] }
+          : a
+      )
+    })
+  }
+
+  const handleRemoveDepot = (depotId: string): void => {
+    if (!selectedApp) return
+    if (selectedApp.depots.length <= 1) return
+    saveConfig({
+      ...config,
+      apps: config.apps.map((a) =>
+        a.appId === selectedApp.appId
+          ? { ...a, depots: a.depots.filter((d) => d.id !== depotId) }
           : a
       )
     })
@@ -89,7 +115,12 @@ export default function App(): JSX.Element {
 
         {selectedApp && (
           <>
-            <DepotPanel depots={selectedApp.depots} onUpdateDepot={handleUpdateDepotPath} />
+            <DepotPanel
+              depots={selectedApp.depots}
+              onUpdateDepot={handleUpdateDepot}
+              onAddDepot={handleAddDepot}
+              onRemoveDepot={handleRemoveDepot}
+            />
             <UploadControls
               branch={branch}
               preview={preview}
