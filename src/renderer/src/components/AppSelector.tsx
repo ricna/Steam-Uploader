@@ -44,7 +44,7 @@ export function AppSelector({
               <button
                 key={app.appId}
                 className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-[#222] transition-colors text-left ${
-                  app.appId === selectedAppId ? 'bg-[#1e2a1e]' : ''
+                  app.appId === selectedAppId ? 'bg-[#2a1f10]' : ''
                 }`}
                 onClick={() => {
                   onSelect(app.appId)
@@ -57,7 +57,7 @@ export function AppSelector({
                   <div className="text-xs text-[#aaa]">App ID {app.appId}</div>
                 </div>
                 {app.appId === selectedAppId && (
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#4caf50] flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#ff8c42] flex-shrink-0" />
                 )}
               </button>
             ))}

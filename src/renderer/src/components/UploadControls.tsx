@@ -33,13 +33,13 @@ export function UploadControls({
         <label className="flex items-center gap-2 cursor-pointer mt-4">
           <button
             type="button"
-            className={`w-9 h-5 rounded-full relative transition-colors ${preview ? 'bg-[#2a4a2a]' : 'bg-[#1e1e1e]'}`}
+            className={`w-9 h-5 rounded-full relative transition-colors ${preview ? 'bg-[#4a2a0f]' : 'bg-[#1e1e1e]'}`}
             onClick={() => onPreviewChange(!preview)}
             aria-pressed={preview}
           >
             <span
               className={`absolute top-0.5 w-4 h-4 rounded-full transition-all ${
-                preview ? 'left-4 bg-[#4caf50]' : 'left-0.5 bg-[#333]'
+                preview ? 'left-4 bg-[#ff8c42]' : 'left-0.5 bg-[#333]'
               }`}
             />
           </button>
@@ -55,7 +55,7 @@ export function UploadControls({
             ? 'bg-[#1a1a1a] text-[#aaa] cursor-wait border border-[#222]'
             : !canUpload
               ? 'bg-[#1a1a1a] text-[#888] cursor-not-allowed border border-[#1e1e1e]'
-              : 'bg-[#1a4a1a] hover:bg-[#1f5a1f] active:bg-[#163d16] text-[#4caf50] border border-[#2a6a2a] hover:border-[#3a7a3a]'
+              : 'bg-[#3f1f0a] hover:bg-[#5c3017] active:bg-[#2f180a] text-[#ff8c42] border border-[#5c2f10] hover:border-[#7d4220]'
         }`}
       >
         {uploading ? <SpinnerIcon /> : <UploadIcon />}

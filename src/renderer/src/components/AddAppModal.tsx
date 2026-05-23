@@ -65,7 +65,7 @@ export function AddAppModal({ onAdd, onClose }: AddAppModalProps): JSX.Element {
           <button
             onClick={handleAdd}
             disabled={!fetched}
-            className="flex-1 py-2.5 rounded-xl bg-[#1a4a1a] hover:bg-[#1f5a1f] border border-[#2a6a2a] text-sm text-[#4caf50] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            className="flex-1 py-2.5 rounded-xl bg-[#3f1f0a] hover:bg-[#5c3017] border border-[#5c2f10] text-sm text-[#ff8c42] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
           >
             Add App
           </button>
@@ -117,7 +117,7 @@ export function AddAppModal({ onAdd, onClose }: AddAppModalProps): JSX.Element {
 
         {fetched && (
           <>
-            <div className="bg-[#0f1a0f] border border-[#1e3a1e] rounded-xl p-4 flex items-center gap-3">
+            <div className="bg-[#1f1408] border border-[#5c2f10] rounded-xl p-4 flex items-center gap-3">
               {fetched.iconUrl && (
                 <img
                   src={fetched.iconUrl}
@@ -166,7 +166,7 @@ function Spinner(): JSX.Element {
 
 function CheckIcon(): JSX.Element {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-[#4caf50] flex-shrink-0">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-[#ff8c42] flex-shrink-0">
       <path
         d="M20 6L9 17l-5-5"
         stroke="currentColor"

@@ -19,7 +19,7 @@ export function EmptyState({ onAddApp }: EmptyStateProps): JSX.Element {
       </div>
       <button
         onClick={onAddApp}
-        className="text-xs text-[#4caf50] hover:text-[#66bb6a] transition-colors"
+        className="text-xs text-[#ff8c42] hover:text-[#ffa15c] transition-colors"
       >
         Add App →
       </button>

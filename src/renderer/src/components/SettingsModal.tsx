@@ -46,7 +46,7 @@ export function SettingsModal({
           </button>
           <button
             onClick={handleSave}
-            className="flex-1 py-2.5 rounded-xl bg-[#1a4a1a] hover:bg-[#1f5a1f] border border-[#2a6a2a] text-sm text-[#4caf50] transition-colors"
+            className="flex-1 py-2.5 rounded-xl bg-[#3f1f0a] hover:bg-[#5c3017] border border-[#5c2f10] text-sm text-[#ff8c42] transition-colors"
           >
             Save
           </button>

@@ -45,11 +45,11 @@ export function LogPanel({ logs, status, onClear }: LogPanelProps): JSX.Element 
 function StatusDot({ status }: { status: UploadStatus }): JSX.Element {
   const color =
     status === 'success'
-      ? 'bg-[#4caf50]'
+      ? 'bg-[#ff8c42]'
       : status === 'error'
         ? 'bg-[#f44336]'
         : status === 'uploading'
-          ? 'bg-[#f5a623] animate-pulse'
+          ? 'bg-[#5fc5e8] animate-pulse'
           : 'bg-[#333]'
   return <div className={`w-1.5 h-1.5 rounded-full ${color}`} />
 }
@@ -57,7 +57,7 @@ function StatusDot({ status }: { status: UploadStatus }): JSX.Element {
 function lineColor(line: string): string {
   const lower = line.toLowerCase()
   if (lower.includes('error') || lower.includes('fail')) return 'text-[#f44336]'
-  if (lower.includes('success') || lower.includes('complete')) return 'text-[#4caf50]'
+  if (lower.includes('success') || lower.includes('complete')) return 'text-[#ff8c42]'
   if (line.startsWith('[Steam Uploader]')) return 'text-[#888]'
   return ''
 }
