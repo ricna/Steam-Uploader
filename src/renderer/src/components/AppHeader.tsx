@@ -7,15 +7,15 @@ export function AppHeader({ onOpenSettings }: AppHeaderProps): JSX.Element {
     <header className="flex items-center justify-between px-4 pt-3 pb-2">
       <div className="flex items-center gap-2">
         <SteamGlyph />
-        <span className="text-[11px] text-[#444] font-medium tracking-wide">STEAM UPLOADER</span>
+        <span className="text-[11px] text-[#999] font-medium tracking-wide">STEAM UPLOADER</span>
       </div>
       <div className="flex items-center gap-3">
-        <span className="text-[10px] text-[#333] font-medium tracking-widest uppercase select-none">
+        <span className="text-[10px] text-[#888] font-medium tracking-widest uppercase select-none">
           Lumiric Studio
         </span>
         <button
           onClick={onOpenSettings}
-          className="text-[#444] hover:text-[#888] transition-colors p-1"
+          className="text-[#999] hover:text-[#888] transition-colors p-1"
           title="Settings"
           aria-label="Settings"
         >

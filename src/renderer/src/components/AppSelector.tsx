@@ -29,10 +29,10 @@ export function AppSelector({
             {selected ? (
               <>
                 <div className="font-medium text-sm text-white truncate">{selected.name}</div>
-                <div className="text-xs text-[#555] mt-0.5">App ID {selected.appId}</div>
+                <div className="text-xs text-[#aaa] mt-0.5">App ID {selected.appId}</div>
               </>
             ) : (
-              <span className="text-[#555] text-sm">No app selected</span>
+              <span className="text-[#aaa] text-sm">No app selected</span>
             )}
           </div>
           <ChevronIcon open={open} />
@@ -54,7 +54,7 @@ export function AppSelector({
                 <AppIcon iconUrl={app.iconUrl} />
                 <div className="flex-1 min-w-0">
                   <div className="text-sm text-white truncate">{app.name}</div>
-                  <div className="text-xs text-[#555]">App ID {app.appId}</div>
+                  <div className="text-xs text-[#aaa]">App ID {app.appId}</div>
                 </div>
                 {app.appId === selectedAppId && (
                   <div className="w-1.5 h-1.5 rounded-full bg-[#4caf50] flex-shrink-0" />
@@ -91,7 +91,7 @@ function ChevronIcon({ open }: { open: boolean }): JSX.Element {
       height="14"
       viewBox="0 0 24 24"
       fill="none"
-      className={`text-[#555] flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`}
+      className={`text-[#aaa] flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`}
     >
       <path d="M7 10l5 5 5-5z" fill="currentColor" />
     </svg>

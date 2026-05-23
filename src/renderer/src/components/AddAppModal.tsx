@@ -58,7 +58,7 @@ export function AddAppModal({ onAdd, onClose }: AddAppModalProps): JSX.Element {
         <>
           <button
             onClick={onClose}
-            className="flex-1 py-2.5 rounded-xl border border-[#2a2a2a] text-sm text-[#555] hover:text-[#888] hover:border-[#333] transition-colors"
+            className="flex-1 py-2.5 rounded-xl border border-[#2a2a2a] text-sm text-[#aaa] hover:text-[#888] hover:border-[#333] transition-colors"
           >
             Cancel
           </button>
@@ -74,7 +74,7 @@ export function AddAppModal({ onAdd, onClose }: AddAppModalProps): JSX.Element {
     >
       <div className="flex flex-col gap-4">
         <div>
-          <label className="text-xs text-[#444] block mb-1.5">App ID</label>
+          <label className="text-xs text-[#999] block mb-1.5">App ID</label>
           <div className="flex gap-2">
             <input
               type="text"
@@ -86,17 +86,17 @@ export function AddAppModal({ onAdd, onClose }: AddAppModalProps): JSX.Element {
               }}
               onKeyDown={(e) => e.key === 'Enter' && handleLookup()}
               placeholder="e.g. 480"
-              className="flex-1 bg-[#0f0f0f] border border-[#1e1e1e] rounded-lg px-3 py-2.5 text-sm text-[#ccc] placeholder-[#333] focus:outline-none focus:border-[#333] transition-colors font-mono"
+              className="flex-1 bg-[#0f0f0f] border border-[#1e1e1e] rounded-lg px-3 py-2.5 text-sm text-[#ccc] placeholder-[#666] focus:outline-none focus:border-[#333] transition-colors font-mono"
             />
             <button
               onClick={handleLookup}
               disabled={!appId || fetching}
-              className="px-4 py-2.5 rounded-lg bg-[#1a1a1a] hover:bg-[#222] border border-[#2a2a2a] text-xs text-[#666] hover:text-[#999] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2.5 rounded-lg bg-[#1a1a1a] hover:bg-[#222] border border-[#2a2a2a] text-xs text-[#bbb] hover:text-[#999] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
             >
               {fetching ? <Spinner /> : 'Look up'}
             </button>
           </div>
-          <p className="text-xs text-[#333] mt-1.5">
+          <p className="text-xs text-[#888] mt-1.5">
             Find this on partner.steamgames.com or your Steam store page URL.
           </p>
         </div>
@@ -127,20 +127,20 @@ export function AddAppModal({ onAdd, onClose }: AddAppModalProps): JSX.Element {
               )}
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium text-white truncate">{fetched.name}</div>
-                <div className="text-xs text-[#555] mt-0.5">App ID {appId}</div>
+                <div className="text-xs text-[#aaa] mt-0.5">App ID {appId}</div>
               </div>
               <CheckIcon />
             </div>
 
             <div>
-              <label className="text-xs text-[#444] block mb-1.5">Depot ID</label>
+              <label className="text-xs text-[#999] block mb-1.5">Depot ID</label>
               <input
                 type="text"
                 value={depotId}
                 onChange={(e) => setDepotId(e.target.value.replace(/\D/g, ''))}
                 className="w-full bg-[#0f0f0f] border border-[#1e1e1e] rounded-lg px-3 py-2.5 text-sm text-[#ccc] font-mono focus:outline-none focus:border-[#333] transition-colors"
               />
-              <p className="text-xs text-[#333] mt-1.5">
+              <p className="text-xs text-[#888] mt-1.5">
                 Default is App ID + 1. Change only if your depot ID differs.
               </p>
             </div>

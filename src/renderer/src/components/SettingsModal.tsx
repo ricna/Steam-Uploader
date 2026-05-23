@@ -40,7 +40,7 @@ export function SettingsModal({
         <>
           <button
             onClick={onClose}
-            className="flex-1 py-2.5 rounded-xl border border-[#2a2a2a] text-sm text-[#555] hover:text-[#888] hover:border-[#333] transition-colors"
+            className="flex-1 py-2.5 rounded-xl border border-[#2a2a2a] text-sm text-[#aaa] hover:text-[#888] hover:border-[#333] transition-colors"
           >
             Cancel
           </button>
@@ -61,7 +61,7 @@ export function SettingsModal({
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="your_steam_username"
-              className="w-full bg-[#0f0f0f] border border-[#1e1e1e] rounded-lg px-3 py-2.5 text-sm text-[#ccc] placeholder-[#333] focus:outline-none focus:border-[#333] transition-colors"
+              className="w-full bg-[#0f0f0f] border border-[#1e1e1e] rounded-lg px-3 py-2.5 text-sm text-[#ccc] placeholder-[#666] focus:outline-none focus:border-[#333] transition-colors"
             />
           </Field>
           <Field label="Password" hint="Encrypted locally with your OS keychain">
@@ -71,12 +71,12 @@ export function SettingsModal({
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-[#0f0f0f] border border-[#1e1e1e] rounded-lg px-3 py-2.5 pr-10 text-sm text-[#ccc] placeholder-[#333] focus:outline-none focus:border-[#333] transition-colors"
+                className="w-full bg-[#0f0f0f] border border-[#1e1e1e] rounded-lg px-3 py-2.5 pr-10 text-sm text-[#ccc] placeholder-[#666] focus:outline-none focus:border-[#333] transition-colors"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword((s) => !s)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#444] hover:text-[#666] transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#999] hover:text-[#bbb] transition-colors"
                 aria-label={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? <EyeOffIcon /> : <EyeIcon />}
@@ -91,7 +91,7 @@ export function SettingsModal({
               <span className="text-xs text-[#888]">
                 {sdk?.isBundled ? 'Bundled with Steam Uploader' : 'Custom binary'}
               </span>
-              <span className="text-[10px] text-[#444] font-mono">
+              <span className="text-[10px] text-[#999] font-mono">
                 {sdk?.version ? `Version ${sdk.version}` : 'Version not yet detected'}
               </span>
             </div>
@@ -103,7 +103,7 @@ export function SettingsModal({
               {checkingSdk ? 'Checking…' : 'Check for updates'}
             </button>
           </div>
-          <p className="text-[10px] text-[#333] mt-2 px-1">
+          <p className="text-[10px] text-[#888] mt-2 px-1">
             SteamCMD auto-updates against Valve's servers on every run.
           </p>
         </Section>
@@ -129,7 +129,7 @@ export function SettingsModal({
 function Section({ title, children }: { title: string; children: React.ReactNode }): JSX.Element {
   return (
     <div>
-      <div className="text-xs text-[#555] uppercase tracking-wider mb-3">{title}</div>
+      <div className="text-xs text-[#aaa] uppercase tracking-wider mb-3">{title}</div>
       <div className="flex flex-col gap-2">{children}</div>
     </div>
   )
@@ -144,9 +144,9 @@ interface FieldProps {
 function Field({ label, hint, children }: FieldProps): JSX.Element {
   return (
     <div>
-      <label className="text-xs text-[#444] block mb-1.5">{label}</label>
+      <label className="text-xs text-[#999] block mb-1.5">{label}</label>
       {children}
-      {hint && <p className="text-[10px] text-[#333] mt-1.5">{hint}</p>}
+      {hint && <p className="text-[10px] text-[#888] mt-1.5">{hint}</p>}
     </div>
   )
 }

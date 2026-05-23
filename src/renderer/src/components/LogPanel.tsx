@@ -21,16 +21,16 @@ export function LogPanel({ logs, status, onClear }: LogPanelProps): JSX.Element 
       <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#1a1a1a]">
         <div className="flex items-center gap-2">
           <StatusDot status={status} />
-          <span className="text-xs text-[#444]">Output Log</span>
+          <span className="text-xs text-[#999]">Output Log</span>
         </div>
         <button
           onClick={onClear}
-          className="text-xs text-[#333] hover:text-[#666] transition-colors"
+          className="text-xs text-[#888] hover:text-[#bbb] transition-colors"
         >
           Clear
         </button>
       </div>
-      <div className="flex-1 overflow-y-auto p-4 font-mono text-xs text-[#666] leading-relaxed">
+      <div className="flex-1 overflow-y-auto p-4 font-mono text-xs text-[#bbb] leading-relaxed">
         {logs.map((line, i) => (
           <span key={i} className={lineColor(line)}>
             {line}

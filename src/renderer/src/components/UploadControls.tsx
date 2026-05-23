@@ -21,13 +21,13 @@ export function UploadControls({
     <>
       <div className="bg-[#141414] border border-[#1e1e1e] rounded-xl p-4 flex items-center gap-4">
         <div className="flex-1">
-          <label className="text-xs text-[#555] block mb-1.5">Branch (optional)</label>
+          <label className="text-xs text-[#aaa] block mb-1.5">Branch (optional)</label>
           <input
             type="text"
             value={branch}
             onChange={(e) => onBranchChange(e.target.value)}
             placeholder="default"
-            className="w-full bg-[#0f0f0f] border border-[#1e1e1e] rounded-lg px-3 py-2 text-xs text-[#999] placeholder-[#333] focus:outline-none focus:border-[#333] transition-colors"
+            className="w-full bg-[#0f0f0f] border border-[#1e1e1e] rounded-lg px-3 py-2 text-xs text-[#999] placeholder-[#666] focus:outline-none focus:border-[#333] transition-colors"
           />
         </div>
         <label className="flex items-center gap-2 cursor-pointer mt-4">
@@ -43,7 +43,7 @@ export function UploadControls({
               }`}
             />
           </button>
-          <span className="text-xs text-[#555]">Preview only</span>
+          <span className="text-xs text-[#aaa]">Preview only</span>
         </label>
       </div>
 
@@ -52,9 +52,9 @@ export function UploadControls({
         disabled={uploading || !canUpload}
         className={`flex items-center justify-center gap-2.5 rounded-xl py-3.5 px-6 font-medium text-sm transition-all ${
           uploading
-            ? 'bg-[#1a1a1a] text-[#555] cursor-wait border border-[#222]'
+            ? 'bg-[#1a1a1a] text-[#aaa] cursor-wait border border-[#222]'
             : !canUpload
-              ? 'bg-[#1a1a1a] text-[#333] cursor-not-allowed border border-[#1e1e1e]'
+              ? 'bg-[#1a1a1a] text-[#888] cursor-not-allowed border border-[#1e1e1e]'
               : 'bg-[#1a4a1a] hover:bg-[#1f5a1f] active:bg-[#163d16] text-[#4caf50] border border-[#2a6a2a] hover:border-[#3a7a3a]'
         }`}
       >

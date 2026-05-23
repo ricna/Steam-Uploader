@@ -8,10 +8,10 @@ interface FooterProps {
 export function Footer({ build, sdk }: FooterProps): JSX.Element {
   return (
     <footer className="flex items-center justify-between px-4 pb-3 pt-1">
-      <span className="text-[10px] text-[#2a2a2a] font-mono">
+      <span className="text-[10px] text-[#888] font-mono">
         {build ? `v${build.version} · build ${build.buildId}` : ''}
       </span>
-      <span className="text-[10px] text-[#2a2a2a] font-mono">
+      <span className="text-[10px] text-[#888] font-mono">
         {sdk?.version
           ? `SteamCMD ${sdk.version}${sdk.isBundled ? ' · bundled' : ''}`
           : sdk

@@ -36,7 +36,7 @@ export function Modal({
           <h2 className="text-sm font-semibold text-white">{title}</h2>
           <button
             onClick={onClose}
-            className="text-[#444] hover:text-[#888] transition-colors"
+            className="text-[#999] hover:text-[#888] transition-colors"
             aria-label="Close"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
