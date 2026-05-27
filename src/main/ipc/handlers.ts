@@ -99,13 +99,21 @@ export function registerIpcHandlers(options: SetupOptions): void {
         })
 
         sendLog(`[Steam Uploader] Starting upload for ${app.name} (App ${appId})\n`)
-        return await runUpload({
+        const result = await runUpload({
           steamcmdPath,
           username,
           password,
           appVdfPath,
           onLog: sendLog
         })
+
+        if (result.success) {
+          sendLog(`\n[Steam Uploader] Upload complete.\n`)
+        } else if (result.exitCode !== null && result.exitCode !== 0) {
+          sendLog(`\n[Steam Uploader] SteamCMD exited with code ${result.exitCode}.\n`)
+        }
+
+        return result
       } catch (err) {
         const message = err instanceof Error ? err.message : 'Unknown error'
         sendLog(`[Steam Uploader] ${message}\n`)

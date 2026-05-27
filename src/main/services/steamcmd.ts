@@ -25,11 +25,9 @@ export async function runUpload(options: RunUploadOptions): Promise<UploadResult
   const { steamcmdPath, username, password, appVdfPath, onLog } = options
 
   if (!fs.existsSync(steamcmdPath)) {
-    return {
-      success: false,
-      exitCode: null,
-      error: `SteamCMD binary not found at ${steamcmdPath}`
-    }
+    const error = `SteamCMD binary not found at ${steamcmdPath}\nRun \`npm run prepare-sdk\` to stage the bundled tooling, or set a custom path in Settings.\n`
+    onLog(`Error: ${error}`)
+    return { success: false, exitCode: null, error }
   }
 
   return new Promise<UploadResult>((resolve) => {
