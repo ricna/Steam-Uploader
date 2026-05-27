@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { UploadStatus } from '../hooks/useUpload'
 
 interface LogPanelProps {
@@ -9,16 +9,27 @@ interface LogPanelProps {
 
 export function LogPanel({ logs, status, onClear }: LogPanelProps): JSX.Element | null {
   const endRef = useRef<HTMLDivElement>(null)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [logs])
 
+  const handleCopy = async (): Promise<void> => {
+    try {
+      await navigator.clipboard.writeText(logs.join(''))
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    } catch {
+      /* clipboard not available — silently ignore */
+    }
+  }
+
   if (logs.length === 0) return null
 
   return (
     <div className="flex-1 min-h-0 bg-[#090909] border border-[#1a1a1a] rounded-xl overflow-hidden flex flex-col">
-      <StatusHeader status={status} onClear={onClear} />
+      <StatusHeader status={status} onClear={onClear} onCopy={handleCopy} copied={copied} />
       <div className="flex-1 overflow-y-auto p-4 font-mono text-xs text-[#bbb] leading-relaxed">
         {logs.map((line, i) => (
           <span key={i} className={lineColor(line)}>
@@ -34,9 +45,11 @@ export function LogPanel({ logs, status, onClear }: LogPanelProps): JSX.Element 
 interface StatusHeaderProps {
   status: UploadStatus
   onClear: () => void
+  onCopy: () => void
+  copied: boolean
 }
 
-function StatusHeader({ status, onClear }: StatusHeaderProps): JSX.Element {
+function StatusHeader({ status, onClear, onCopy, copied }: StatusHeaderProps): JSX.Element {
   const config = HEADER_STATES[status]
   return (
     <div
@@ -46,10 +59,58 @@ function StatusHeader({ status, onClear }: StatusHeaderProps): JSX.Element {
         <StatusIcon status={status} />
         <span className={`text-xs font-medium ${config.text}`}>{config.label}</span>
       </div>
-      <button onClick={onClear} className="text-xs text-[#888] hover:text-[#bbb] transition-colors">
-        Clear
-      </button>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={onCopy}
+          className="text-xs text-[#888] hover:text-[#bbb] transition-colors flex items-center gap-1.5"
+          title="Copy entire log to clipboard"
+        >
+          {copied ? (
+            <>
+              <CheckGlyph /> Copied
+            </>
+          ) : (
+            <>
+              <CopyGlyph /> Copy
+            </>
+          )}
+        </button>
+        <button
+          onClick={onClear}
+          className="text-xs text-[#888] hover:text-[#bbb] transition-colors"
+        >
+          Clear
+        </button>
+      </div>
     </div>
+  )
+}
+
+function CopyGlyph(): JSX.Element {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+      <rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.7" />
+      <path
+        d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+      />
+    </svg>
+  )
+}
+
+function CheckGlyph(): JSX.Element {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" className="text-[#ff8c42]">
+      <path
+        d="M20 6L9 17l-5-5"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   )
 }
 

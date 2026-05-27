@@ -38,12 +38,25 @@ export async function runUpload(options: RunUploadOptions): Promise<UploadResult
     })
 
     let mobileAuthShown = false
+    let buildSucceeded = false
     const forward = (chunk: Buffer): void => {
       const text = stripAnsi(chunk.toString())
       onLog(text)
 
+      const lower = text.toLowerCase()
+
+      // Detect the canonical success marker so we can trust it even when
+      // steamcmd self-updates after the upload and returns a noisy exit
+      // code from the update cycle (commonly 7 or 42).
+      if (
+        !buildSucceeded &&
+        (lower.includes('successfully finished appid') ||
+          lower.includes('successfully built appid'))
+      ) {
+        buildSucceeded = true
+      }
+
       if (!mobileAuthShown) {
-        const lower = text.toLowerCase()
         const wantsMobileConfirm =
           lower.includes('confirmation of login') ||
           lower.includes('mobile authenticator') ||
@@ -64,7 +77,11 @@ export async function runUpload(options: RunUploadOptions): Promise<UploadResult
     proc.stderr.on('data', forward)
 
     proc.on('close', (code) => {
-      resolve({ success: code === 0, exitCode: code })
+      // Trust the build success marker over the exit code — steamcmd often
+      // exits non-zero from a post-upload self-update cycle even though the
+      // build itself was committed successfully.
+      const success = buildSucceeded || code === 0
+      resolve({ success, exitCode: code })
     })
 
     proc.on('error', (err) => {
