@@ -37,8 +37,27 @@ export async function runUpload(options: RunUploadOptions): Promise<UploadResult
       env: { ...process.env, STEAMCMD_NOCRASHMONITOR: '1' }
     })
 
+    let mobileAuthShown = false
     const forward = (chunk: Buffer): void => {
-      onLog(stripAnsi(chunk.toString()))
+      const text = stripAnsi(chunk.toString())
+      onLog(text)
+
+      if (!mobileAuthShown) {
+        const lower = text.toLowerCase()
+        const wantsMobileConfirm =
+          lower.includes('confirmation of login') ||
+          lower.includes('mobile authenticator') ||
+          lower.includes('please confirm') ||
+          lower.includes('two-factor code') ||
+          lower.includes('steam guard')
+        if (wantsMobileConfirm) {
+          mobileAuthShown = true
+          onLog(
+            '\n[Steam Uploader] Steam is waiting for confirmation. ' +
+              'Open the Steam mobile app and approve the login attempt.\n\n'
+          )
+        }
+      }
     }
 
     proc.stdout.on('data', forward)
